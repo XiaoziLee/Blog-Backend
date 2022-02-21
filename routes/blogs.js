@@ -17,7 +17,7 @@ router.post('/submitBlog',(req, res) =>{
         if(result && result.length === 1){
             const userId = result[0].id
             const currentTime = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
-            db.connection.query({
+            db.connectionPool.query({
                 sql: 'insert into blogs(user_id,blog_title,blog_text,blog_update_date) values(?,?,?,?)',
                 values:[userId,req.body.blog_title,req.body.blog_text,currentTime]
             },(err, result, fields) => {
